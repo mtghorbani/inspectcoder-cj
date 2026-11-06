@@ -1,0 +1,24 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "InspectCJ: standalone candidate",
+      "type": "process",
+      "command": "${config:inspectCJ.executable}",
+      "args": ["repair", "${file}", "--task", "${input:task}", "--expect-line", "${input:expected}", "--non-interactive"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "always", "panel": "dedicated" }
+    },
+    {
+      "label": "InspectCJ: native package candidate",
+      "type": "process",
+      "command": "${config:inspectCJ.executable}",
+      "args": ["repair", "${workspaceFolder}", "--non-interactive"],
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    { "id": "task", "type": "promptString", "description": "Intended behavior" },
+    { "id": "expected", "type": "promptString", "description": "Independent expected output line" }
+  ]
+}

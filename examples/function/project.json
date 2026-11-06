@@ -1,0 +1,10 @@
+{
+  "sources": ["bounds.cj", "main.cj"],
+  "editable": "bounds.cj",
+  "requirement": "For positive size, boundedIndex must clamp index into 0 through size-1 inclusive. Preserve the function signature; the separate main.cj driver is not editable.",
+  "tests": [
+    {"name": "upper", "args": ["5", "3"], "stdout": "2\n"},
+    {"name": "lower", "args": ["-1", "3"], "stdout": "0\n"},
+    {"name": "inside", "args": ["1", "3"], "stdout": "1\n"}
+  ]
+}

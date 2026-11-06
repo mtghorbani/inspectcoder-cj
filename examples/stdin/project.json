@@ -1,0 +1,10 @@
+{
+  "sources": ["main.cj"],
+  "editable": "main.cj",
+  "requirement": "Read a single integer from stdin and print twice that value.",
+  "tests": [
+    {"name": "four", "stdin": "4\n", "stdout": "8\n"},
+    {"name": "negative", "stdin": "-3\n", "stdout": "-6\n"},
+    {"name": "zero", "stdin": "0\n", "stdout": "0\n"}
+  ]
+}

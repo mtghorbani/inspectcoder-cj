@@ -1,0 +1,151 @@
+{
+  "name": "inspectcoder-cj",
+  "displayName": "InspectCoder CJ",
+  "description": "Evidence-grounded native Cangjie repair with compiler, CJDB and cjpm validation",
+  "version": "0.2.0",
+  "publisher": "mtghorbani",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "main": "./extension.js",
+  "extensionKind": [
+    "workspace"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": false,
+      "description": "Repair executes native project code and the configured CLI."
+    },
+    "virtualWorkspaces": {
+      "supported": false
+    }
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "inspectCJ.repairFile",
+        "title": "InspectCJ: Repair Current File"
+      },
+      {
+        "command": "inspectCJ.repairPackage",
+        "title": "InspectCJ: Repair Package"
+      },
+      {
+        "command": "inspectCJ.repairSelectedTest",
+        "title": "InspectCJ: Repair Selected Native Test"
+      },
+      {
+        "command": "inspectCJ.configureInputs",
+        "title": "InspectCJ: Configure Repair Inputs"
+      },
+      {
+        "command": "inspectCJ.reviewCandidate",
+        "title": "InspectCJ: Review Candidate Diff"
+      },
+      {
+        "command": "inspectCJ.applyCandidate",
+        "title": "InspectCJ: Apply Candidate"
+      },
+      {
+        "command": "inspectCJ.cancel",
+        "title": "InspectCJ: Cancel Repair"
+      }
+    ],
+    "configuration": {
+      "title": "InspectCJ",
+      "properties": {
+        "inspectCJ.executable": {
+          "type": "string",
+          "default": "inspect-cj",
+          "scope": "resource",
+          "description": "InspectCJ executable path on this local host. No shell or arguments."
+        },
+        "inspectCJ.environment": {
+          "type": "object",
+          "default": {},
+          "additionalProperties": {
+            "type": "string"
+          },
+          "scope": "resource",
+          "description": "Child-only SDK environment overrides. Do not store secrets here."
+        },
+        "inspectCJ.requestFile": {
+          "type": "string",
+          "default": ".inspect-cj/request.json",
+          "scope": "resource",
+          "description": "Standalone repair request JSON, relative to workspace root."
+        },
+        "inspectCJ.runTimeout": {
+          "type": "number",
+          "default": 600,
+          "minimum": 1,
+          "scope": "resource",
+          "description": "Shared CLI repair deadline in seconds."
+        },
+        "inspectCJ.transport": {
+          "type": "string",
+          "enum": [
+            "codex",
+            "responses",
+            "scripted"
+          ],
+          "default": "codex",
+          "scope": "resource",
+          "description": "Existing CLI transport; authentication remains unchanged."
+        },
+        "inspectCJ.model": {
+          "type": "string",
+          "default": "",
+          "scope": "resource",
+          "description": "Optional per-run model override; empty retains existing pins."
+        },
+        "inspectCJ.script": {
+          "type": "string",
+          "default": "",
+          "scope": "resource",
+          "description": "Absolute offline response script path for scripted transport."
+        }
+      }
+    },
+    "menus": {
+      "editor/context": [
+        {
+          "command": "inspectCJ.repairFile",
+          "when": "resourceExtname == .cj && isWorkspaceTrusted",
+          "group": "navigation"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "test": "node ../../scripts/copy-runtime.cjs vscode && node --test test/*.test.js",
+    "test:host": "node ../../scripts/copy-runtime.cjs vscode && node test/run-host.js",
+    "check": "node ../../scripts/copy-runtime.cjs vscode && node --check core.js && node --check extension.js && node --check test/host.js && node --check test/run-host.js && prettier --check core.js extension.js test/*.js package.json",
+    "package": "node ../../scripts/copy-runtime.cjs vscode && vsce package --no-dependencies",
+    "vscode:prepublish": "node ../../scripts/copy-runtime.cjs vscode"
+  },
+  "devDependencies": {
+    "@vscode/test-electron": "3.1.0",
+    "@vscode/vsce": "4.1.0",
+    "prettier": "3.6.2"
+  },
+  "overrides": {
+    "@vscode/vsce": {
+      "minimatch": "^11.0.1"
+    }
+  },
+  "author": "mtghorbani",
+  "homepage": "https://github.com/mtghorbani/inspectcoder-cj#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mtghorbani/inspectcoder-cj.git",
+    "directory": "editors/vscode"
+  },
+  "bugs": {
+    "url": "https://github.com/mtghorbani/inspectcoder-cj/issues"
+  }
+}

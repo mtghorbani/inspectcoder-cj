@@ -1,0 +1,45 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+.pytest_cache/
+.ruff_cache/
+build/
+dist/
+.inspect-cj/
+node_modules/
+*.vsix
+.vscode-test/
+
+# Generated from the shared root runtime during client builds.
+/plugins/agent-tools/runtime/
+/editors/vscode/runtime/
+
+# Canonical MIT grant copied into distributable client packages.
+/plugins/agent-tools/LICENSE
+/editors/vscode/LICENSE
+
+# Local delivery history and personal editor preferences are not source releases.
+/data/
+/future-plan/
+/.cursorrules
+/.lavish/
+/.superpowers/
+/.vscode/
+/DELIVERY_MANIFEST.json
+/DELIVERY_MANIFEST.sha256
+/RUNTIME_SYNC_REVIEW.md
+/RUNTIME_SYNC_REVIEW_INITIAL.md
+/RUNTIME_SYNC_VALIDATION.json
+
+# Local instructions, development records, and article drafts.
+/AGENTS.md
+/docs/reviews/
+/docs/investigations/
+/docs/superpowers/
+/blog-post/
+.DS_Store
+*.log
+.env
+.env.*
+!.env.example

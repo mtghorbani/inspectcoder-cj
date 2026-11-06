@@ -1,0 +1,76 @@
+{
+  "name": "@mtghorbani/inspectcoder-cj",
+  "version": "0.2.0",
+  "description": "InspectCoder CJ tools for native Cangjie repair in OpenCode and Pi",
+  "type": "module",
+  "keywords": [
+    "pi-package",
+    "opencode-plugin",
+    "cangjie"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    ".": "./dist/opencode.js",
+    "./pi": "./dist/pi.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "NOTICE.md",
+    "runtime/cli.cjs",
+    "LICENSE"
+  ],
+  "pi": {
+    "extensions": [
+      "./dist/pi.js"
+    ]
+  },
+  "scripts": {
+    "build": "node ../../scripts/copy-runtime.cjs agent-tools && tsc -p tsconfig.json",
+    "check": "node ../../scripts/copy-runtime.cjs agent-tools && tsc -p tsconfig.json --noEmit && tsc -p tsconfig.test.json && prettier --check src test package.json tsconfig.json tsconfig.test.json",
+    "test": "node ../../scripts/copy-runtime.cjs agent-tools && node --import tsx --test test/*.test.ts",
+    "prepack": "npm run build",
+    "test:hosts": "INSPECT_CJ_HOST_TESTS=1 node --import tsx --test test/live-hosts.test.ts",
+    "test:native": "INSPECT_CJ_PLUGIN_NATIVE=1 node --import tsx --test test/native.test.ts"
+  },
+  "peerDependencies": {
+    "typebox": "^1.3.27"
+  },
+  "peerDependenciesMeta": {
+    "typebox": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@earendil-works/pi-coding-agent": "1.5.0",
+    "@opencode-ai/plugin": "1.19.5",
+    "@types/node": "^22.0.0",
+    "prettier": "3.6.2",
+    "tsx": "^4.20.0",
+    "typescript": "^5.9.0"
+  },
+  "dependencies": {
+    "zod": "^4.6.6"
+  },
+  "overrides": {
+    "@opencode-ai/plugin": {
+      "zod": "$zod"
+    }
+  },
+  "license": "MIT",
+  "author": "mtghorbani",
+  "homepage": "https://github.com/mtghorbani/inspectcoder-cj#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mtghorbani/inspectcoder-cj.git",
+    "directory": "plugins/agent-tools"
+  },
+  "bugs": {
+    "url": "https://github.com/mtghorbani/inspectcoder-cj/issues"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

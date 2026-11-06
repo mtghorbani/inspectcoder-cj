@@ -1,0 +1,17 @@
+* text=auto
+/data export-ignore
+/future-plan export-ignore
+/.cursorrules export-ignore
+/.lavish export-ignore
+/.superpowers export-ignore
+/.vscode export-ignore
+/DELIVERY_MANIFEST.json export-ignore
+/DELIVERY_MANIFEST.sha256 export-ignore
+/RUNTIME_SYNC_REVIEW.md export-ignore
+/RUNTIME_SYNC_REVIEW_INITIAL.md export-ignore
+/RUNTIME_SYNC_VALIDATION.json export-ignore
+/AGENTS.md export-ignore
+/docs/reviews export-ignore
+/docs/investigations export-ignore
+/docs/superpowers export-ignore
+/blog-post export-ignore

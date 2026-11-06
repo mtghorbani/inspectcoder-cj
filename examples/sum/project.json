@@ -1,0 +1,12 @@
+{
+  "sources": ["main.cj"],
+  "editable": "main.cj",
+  "requirement": "Print the sum of all integers from 1 through n inclusive. For n <= 0 print 0. The single argument is n. Preserve the public inclusiveSum function and CLI behavior.",
+  "tests": [
+    {"name": "four", "args": ["4"], "stdout": "10\n"},
+    {"name": "one", "args": ["1"], "stdout": "1\n"},
+    {"name": "zero", "args": ["0"], "stdout": "0\n"},
+    {"name": "negative", "args": ["-3"], "stdout": "0\n"},
+    {"name": "ten", "args": ["10"], "stdout": "55\n"}
+  ]
+}

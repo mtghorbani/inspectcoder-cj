@@ -1,0 +1,21 @@
+include LICENSE NOTICE.md README.md GETTING_STARTED.md release.json
+recursive-include src *.py
+recursive-include tests *.py
+recursive-include examples *.cj *.json *.jsonl *.toml *.txt
+recursive-include runtime *.cjs *.cts
+recursive-include scripts *.py *.cjs
+recursive-include plugins/agent-tools/src *.ts
+recursive-include plugins/agent-tools/test *.ts
+include plugins/agent-tools/package.json plugins/agent-tools/package-lock.json
+include plugins/agent-tools/tsconfig.json plugins/agent-tools/tsconfig.test.json
+include plugins/agent-tools/README.md
+recursive-include editors/vscode *.js *.json *.md
+include editors/vscode/.vscodeignore
+prune editors/vscode/node_modules
+prune editors/vscode/runtime
+prune plugins/agent-tools/node_modules
+prune plugins/agent-tools/runtime
+prune plugins/agent-tools/dist
+prune data
+prune dist
+global-exclude __pycache__ *.py[cod] *.vsix

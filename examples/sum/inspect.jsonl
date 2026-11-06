@@ -1,0 +1,3 @@
+{"action": "set_breakpoint", "file": "main.cj", "line": 8}
+{"action": "control_execution", "command": "continue"}
+{"action": "inspect", "variable": null, "frame": 0}

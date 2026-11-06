@@ -1,0 +1,42 @@
+name: Checks and packages
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  portable:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+      - uses: actions/setup-node@v7
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: |
+            plugins/agent-tools/package-lock.json
+            editors/vscode/package-lock.json
+      - run: python -m pip install -e '.[dev]'
+      - run: npm --prefix plugins/agent-tools ci --ignore-scripts
+      - run: npm --prefix editors/vscode ci --ignore-scripts
+      - run: python -m pytest -q
+      - run: ruff check src tests scripts
+      - run: ruff format --check src tests scripts
+      - run: node --test runtime/test/*.test.cjs
+      - run: npm --prefix plugins/agent-tools run check
+      - run: npm --prefix plugins/agent-tools test
+      - run: plugins/agent-tools/node_modules/.bin/prettier --check runtime scripts/copy-runtime.cjs
+      - run: npm --prefix editors/vscode test
+      - run: npm --prefix editors/vscode run check
+      - run: python scripts/release.py build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: inspectcoder-cj-packages
+          path: dist/release/
+          if-no-files-found: error
